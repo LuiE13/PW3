@@ -1,10 +1,45 @@
 <?php
+    session_start();
+     
+    require "Usuario.class.php";
+    if(isset($_POST['email'])  ){
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+        
+        $conec = $contato = new Usuario();
+        
+        if ($conec) {
 
-     //toda vez que formos trabalhar com sessão, temos que inicializar a sessão?
-     //importar a classe:
-     require "Contato.class.php";
-     //checar se foi clicado no botão enviar dados
-    
+            $existo=$contato->checkUser($email);
+            if ($existo) {
+                echo "<script>
+                    alert('Usuario ja cadastrado!')
+                </script>";
+            } else {
+                $exito = $contato->insertUser($nome , $email , $senha);
+                if ($exito) {
+                    echo "<script>
+                        alert('Usuario inserido com sucesso!')
+                    </script>";
+                    $id = $contato->getUserId($email);
+                    $usuario = $contato->getUser($id);
+                    $_SESSION['nome'] = $usuario['nome'];
+                    $_SESSION['id'] = $usuario['id'];
+                    header("location:index.php");
+                } else {
+                    echo "<script>
+                        alert('Erro ao CADASTRAR usuario, tente novamente mais tarde!')
+                    </script>";
+                }
+            }
+            
+        } else {
+            echo "<script>
+                alert('Erro ao conectar com o banco de dados, Tente novamente mais tarde!')
+            </script>";
+        }
+    }
 
 ?>
 
@@ -21,7 +56,7 @@
     <div class="centraliza">
         <div class="formulario interna">
             <h3>Cadastrar</h3>
-            <form action="teste.php" method="post">
+            <form action="" method="post">
                 Nome:
                 <input type="text" name = "nome" required class="i1">
                 Email:
@@ -30,6 +65,7 @@
                 <input type="password" name = "senha" required class="i1">
                 <div class=centra>
                     <input type="submit" name = "botao" value = "Enviar Dados" class = "otao">
+                    <a href="login.php">Já tem conta? <b>entre</b></a>
                 </div>
             </form>
         </div>

@@ -3,9 +3,19 @@
 }
 body{
 	background: rgb(0,212,255);
-background: linear-gradient(45deg, rgba(0,212,255,1) 0%, rgba(209,240,252,1) 100%);
+	background: linear-gradient(45deg, rgba(0,212,255,1) 0%, rgba(209,240,252,1) 100%);
 	margin: 0;
 	height: 100vh;
+}
+
+a{
+	text-decoration: none;
+	color: #ffffff;
+	margin-top: 5px;
+}
+
+b{
+	text-decoration: underline;
 }
 
 .centraliza{
@@ -33,6 +43,8 @@ background: linear-gradient(45deg, rgba(0,212,255,1) 0%, rgba(209,240,252,1) 100
 }
 .centra{
 	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
@@ -42,8 +54,9 @@ background: linear-gradient(45deg, rgba(0,212,255,1) 0%, rgba(209,240,252,1) 100
 	border-radius: 10px;
 	border: none;
 	padding: 10PX;
+	cursor: pointer;
 	font-weight: bold;
-	box-shadow: 5px 5px 5px 5px rgba(36, 154, 209, 0.322);
+	box-shadow: 5px 5px 5px 5px rgba(23, 96, 129, 0.322);
 	background-color: #14bcff;
 }
 

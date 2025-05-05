@@ -1,24 +1,70 @@
-input{
-    display: block;
-}
-section{
-    background-color: rgb(201, 235, 235);
-    width: 70%;
-    margin: auto;
-    padding: 20px;
+/* Geral */
+*{
+	padding: 0;
+    font-family: 'Arial';
 }
 body{
-    background-color: rgb(181, 223, 223);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
+	background: rgb(0,212,255);
+	background: linear-gradient(45deg, rgba(0,212,255,1) 0%, rgba(209,240,252,1) 100%);
+	margin: 0;
+    height: 100vh;
 }
-div{
-  
+
+h1{
+    text-align: center;
+    color: #000000;
+    font-size: 2.5em;
+    margin-top: 20px;
+}
+
+a{
+	text-decoration: none;
+    color: #f05353;
+}
+
+b{
+	text-decoration: underline;
+}
+
+/* tabela */
+
+table{
+    margin: auto;
+    background-color: #bee2f1;
+    text-align: center;
+    width: 80%;
+    border-collapse: collapse;
+}
+
+th{
+    background-color: #14bcff;
+    color: #e0f0ff;
+    padding: 10px;
+    border:#000000 solid 1px;
+}     
+
+td{
+    background-color: #bee2f1;
+    color: #000000;
+    padding: 10px;
+    border:#000000 solid 1px;
+}
+
+.destaque{
+    background-color: #14bcff;
+    color: #e0f0ff;
+    padding: 10px;
+    border:#000000 solid 1px;
+}
+
+.sair{
+    margin-top: 30px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: aqua;
+    width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	justify-items: center;
 }
-input{
-    margin-top: 15px;
-}
+

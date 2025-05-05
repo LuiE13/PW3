@@ -1,37 +1,54 @@
 <?php
 
-     //toda vez que formos trabalhar com sessão, temos que inicializar a sessão?
-     session_start();
-     //importar a classe:
-     require "Contato.class.php";
-     //checar se foi clicado no botão enviar dados
-     if(isset($_POST['email'])  ){
-        //copiar do post para variaveis locais
-        
+    
+    session_start();
+     
+    require "Usuario.class.php";
+   
+    if(isset($_POST['email'])  ){
+
         $email = $_POST['email'];
         $senha = $_POST['senha'];
-
-        //instanciar a classe Contato em uma variável $contato
-        $contato = new Contato();
+        $conec = $contato = new Usuario();
         
-        //acessar o método checkUser enviando o email que foi digitado no formulario
-        $existeCaba = $contato->checkUser($email);
-
-        if (!empty($existeCaba)) {
-            $chkPass = $contato->checkUserPass($email, $senha);
-            if (!empty($chkPass)) {
-                //o usuario digitou a existe e digitou a senha corretamente
-                // !empty = se não estiver vazio
-                $_SESSION['nome'] = $chkPass['nome'];
-                header("location:index.php");
-                exit();
-            } else{
-                echo "<script>alert('Senha incorreta')</script>";
+        if ($conec) {
+            // echo "<script>
+            //             alert('conecto')
+            //         </script>";
+            $existo=$contato->checkUser($email);
+            if ($existo) {
+                // echo "<script>
+                //     alert('achou')
+                // </script>";
+                $exito = $contato->checkUserPass($email , $senha);
+                if ($exito) {
+                    // echo "<script>
+                    //     alert('acertou a senha')
+                    // </script>";
+                    $id = $contato->getUserId($email);
+                    // echo "<script>
+                    //     alert('$id')
+                    // </script>";
+                    $usuario = $contato->getUser($id);
+                    $_SESSION['id'] = $usuario['id'];
+                    $_SESSION['nome'] = $usuario['nome'];
+                    header("location:index.php");
+                    
+                } else {
+                    echo "<script>
+                        alert('Erro ao logar, senha incorreta!')
+                    </script>";
+                }
+            } else {
+                echo "<script>
+                    alert('Usuario não encontrado!')
+                </script>";
             }
-
+            
         } else {
-            echo "<script>alert('Usuário ou senha inválidos')</script>";
-            exit();
+            echo "<script>
+                alert('Erro ao conectar com o banco de dados, Tente novamente mais tarde!')
+            </script>";
         }
      }
 
@@ -43,7 +60,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login.css">
-    <title>Document</title>
+    <title>Login</title>
 </head>
 <body>
 
@@ -56,7 +73,8 @@
                 Senha:
                 <input type="password" name = "senha" required class="i1">  
                 <div class="centra">
-                <input type="submit" name = "botao" value = "Enviar Dados" class = "otao">
+                    <input type="submit" name = "botao" value = "Enviar Dados" class = "otao">
+                    <a href="cadastrar.php">Não tem conta? <b>registre-se</b></a>
                 </div>
                 
             </form>
